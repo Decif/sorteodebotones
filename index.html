@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Juego interactivo: Elige tu destino entre el botón rojo y el botón azul para descubrir si ganas o pierdes.">
+  <title>Elige tu destino</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Canvas para animación de confeti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <main class="app-container">
+    <div class="card">
+      <header class="header">
+        <span class="badge">Sorteo de Suerte</span>
+        <h1 class="title">Elige tu destino</h1>
+        <p class="subtitle">Dos caminos ante ti. Elige con sabiduría y descubre si la fortuna está de tu lado.</p>
+      </header>
+
+      <!-- Panel de Selección de Botones -->
+      <section id="choice-section" class="choice-section" aria-label="Opciones de juego">
+        <div class="buttons-grid">
+          <button id="btn-red" class="destiny-btn btn-red" type="button" aria-label="Elegir botón rojo">
+            <span class="btn-glow"></span>
+            <div class="btn-content">
+              <span class="btn-icon">🔴</span>
+              <span class="btn-text">Botón Rojo</span>
+              <span class="btn-subtext">Camino del Fuego</span>
+            </div>
+          </button>
+
+          <button id="btn-blue" class="destiny-btn btn-blue" type="button" aria-label="Elegir botón azul">
+            <span class="btn-glow"></span>
+            <div class="btn-content">
+              <span class="btn-icon">🔵</span>
+              <span class="btn-text">Botón Azul</span>
+              <span class="btn-subtext">Camino del Océano</span>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- Panel de Resultado (oculto inicialmente) -->
+      <section id="result-section" class="result-section hidden" aria-live="polite">
+        <div id="result-card" class="result-box">
+          <div id="result-icon" class="result-icon"></div>
+          <h2 id="result-title" class="result-title">Has ganado</h2>
+          <p id="result-description" class="result-description"></p>
+        </div>
+
+        <button id="btn-restart" class="btn-restart" type="button">
+          <span class="restart-icon">🔄</span>
+          <span>Volver a jugar</span>
+        </button>
+      </section>
+
+      <!-- Marcador opcional de victorias y derrotas -->
+      <footer class="stats-footer">
+        <div class="stat-pill">
+          <span class="stat-label">Victorias:</span>
+          <span id="wins-count" class="stat-val win">0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Derrotas:</span>
+          <span id="losses-count" class="stat-val loss">0</span>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
