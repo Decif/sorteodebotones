@@ -473,3 +473,261 @@ body {
     margin-bottom: 0;
   }
 }
+
+/* ==========================================================================
+   Fondo Dinámico: Aviones, Bicicletas, Naves, Coches y Computadoras
+   ========================================================================== */
+.bg-scene {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.bg-item {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  pointer-events: none;
+  will-change: transform, opacity;
+  line-height: 1;
+}
+
+/* Efectos y resplandores por categoría */
+.item-plane {
+  filter: drop-shadow(0 4px 12px rgba(56, 189, 248, 0.45));
+}
+
+.item-bike {
+  filter: drop-shadow(0 4px 10px rgba(52, 211, 153, 0.45));
+}
+
+.item-spaceship {
+  filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.65)) drop-shadow(0 0 24px rgba(59, 130, 246, 0.4));
+}
+
+.item-car {
+  filter: drop-shadow(0 4px 12px rgba(244, 63, 94, 0.45));
+}
+
+.item-computer {
+  filter: drop-shadow(0 0 14px rgba(6, 182, 212, 0.55)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+/* Capas de profundidad (Parallax / Escala / Opacidad) */
+.depth-far {
+  font-size: 1.4rem;
+  opacity: 0.22;
+  filter: blur(0.6px);
+}
+
+.depth-mid {
+  font-size: 2.2rem;
+  opacity: 0.42;
+}
+
+.depth-near {
+  font-size: 3.1rem;
+  opacity: 0.68;
+}
+
+/* Animaciones Ambientales (Elementos fijos flotantes) */
+.float-ambient-1 {
+  animation: bgFloat1 14s ease-in-out infinite alternate;
+}
+
+.float-ambient-2 {
+  animation: bgFloat2 18s ease-in-out infinite alternate;
+}
+
+.float-ambient-3 {
+  animation: bgFloat3 22s ease-in-out infinite alternate;
+}
+
+.float-ambient-pulse {
+  animation: bgFloat1 16s ease-in-out infinite alternate, bgPulseGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes bgFloat1 {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(18px, -24px, 0) rotate(8deg); }
+  100% { transform: translate3d(-14px, 16px, 0) rotate(-6deg); }
+}
+
+@keyframes bgFloat2 {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(-22px, -18px, 0) rotate(-12deg); }
+  100% { transform: translate3d(16px, 20px, 0) rotate(10deg); }
+}
+
+@keyframes bgFloat3 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(24px, 18px, 0) scale(1.08) rotate(6deg); }
+  100% { transform: translate3d(-20px, -14px, 0) scale(0.94) rotate(-4deg); }
+}
+
+@keyframes bgPulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3)); }
+  50% { filter: drop-shadow(0 0 22px rgba(168, 85, 247, 0.65)); }
+}
+
+/* Animaciones de Travesía (Elementos que cruzan la pantalla) */
+.traversing-item {
+  position: absolute;
+}
+
+.traversing-item .inner-sprite {
+  display: inline-block;
+  transform-origin: center;
+}
+
+/* Naves despegando en diagonal */
+@keyframes rocketLaunch {
+  0% {
+    transform: translate3d(-120px, calc(100vh + 80px), 0) rotate(-45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--target-opacity, 0.65);
+  }
+  90% {
+    opacity: var(--target-opacity, 0.65);
+  }
+  100% {
+    transform: translate3d(calc(100vw + 120px), -120px, 0) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+/* OVNI flotando con oscilación suave */
+@keyframes ufoFly {
+  0% {
+    transform: translate3d(-140px, 0, 0);
+    opacity: 0;
+  }
+  10% { opacity: var(--target-opacity, 0.65); }
+  25% { transform: translate3d(25vw, -30px, 0); }
+  50% { transform: translate3d(50vw, 25px, 0); }
+  75% { transform: translate3d(75vw, -20px, 0); }
+  90% { opacity: var(--target-opacity, 0.65); }
+  100% {
+    transform: translate3d(calc(100vw + 140px), 0, 0);
+    opacity: 0;
+  }
+}
+
+/* Aviones volando de izquierda a derecha */
+@keyframes planeFlyLTR {
+  0% {
+    transform: translate3d(-140px, 0, 0) rotate(8deg);
+    opacity: 0;
+  }
+  10% { opacity: var(--target-opacity, 0.65); }
+  90% { opacity: var(--target-opacity, 0.65); }
+  100% {
+    transform: translate3d(calc(100vw + 140px), -40px, 0) rotate(8deg);
+    opacity: 0;
+  }
+}
+
+/* Aviones volando de derecha a izquierda */
+@keyframes planeFlyRTL {
+  0% {
+    transform: translate3d(calc(100vw + 140px), 0, 0) scaleX(-1) rotate(8deg);
+    opacity: 0;
+  }
+  10% { opacity: var(--target-opacity, 0.65); }
+  90% { opacity: var(--target-opacity, 0.65); }
+  100% {
+    transform: translate3d(-140px, -40px, 0) scaleX(-1) rotate(8deg);
+    opacity: 0;
+  }
+}
+
+/* Coches cruzando horizontalmente */
+@keyframes carDriveLTR {
+  0% {
+    transform: translate3d(-140px, 0, 0);
+    opacity: 0;
+  }
+  8% { opacity: var(--target-opacity, 0.65); }
+  92% { opacity: var(--target-opacity, 0.65); }
+  100% {
+    transform: translate3d(calc(100vw + 140px), 0, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes carDriveRTL {
+  0% {
+    transform: translate3d(calc(100vw + 140px), 0, 0) scaleX(-1);
+    opacity: 0;
+  }
+  8% { opacity: var(--target-opacity, 0.65); }
+  92% { opacity: var(--target-opacity, 0.65); }
+  100% {
+    transform: translate3d(-140px, 0, 0) scaleX(-1);
+    opacity: 0;
+  }
+}
+
+/* Bicicletas pedaleando con ritmo suave */
+@keyframes bikeRideLTR {
+  0% {
+    transform: translate3d(-120px, 0, 0);
+    opacity: 0;
+  }
+  10% { opacity: var(--target-opacity, 0.6); }
+  90% { opacity: var(--target-opacity, 0.6); }
+  100% {
+    transform: translate3d(calc(100vw + 120px), 0, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes bikePedalBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Computadoras en órbita lenta y rotación cibernética */
+@keyframes computerDrift {
+  0% {
+    transform: translate3d(-120px, 0, 0) rotate(-12deg);
+    opacity: 0;
+  }
+  12% { opacity: var(--target-opacity, 0.55); }
+  50% { transform: translate3d(50vw, -35px, 0) rotate(8deg); }
+  88% { opacity: var(--target-opacity, 0.55); }
+  100% {
+    transform: translate3d(calc(100vw + 120px), 10px, 0) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+/* Reacción de Victoria en el fondo */
+.bg-scene.celebrating .item-spaceship {
+  filter: drop-shadow(0 0 25px #a855f7) drop-shadow(0 0 35px #38bdf8) !important;
+}
+
+.bg-scene.celebrating .item-plane {
+  filter: drop-shadow(0 0 20px #38bdf8) !important;
+}
+
+/* Respeto a usuarios con sensibilidad a movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .float-ambient-1,
+  .float-ambient-2,
+  .float-ambient-3,
+  .float-ambient-pulse {
+    animation: none !important;
+  }
+  .traversing-item {
+    display: none !important;
+  }
+}
